@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,8 +18,11 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Optional;
 
+import com.cst438.controllers.AssignmentController;
 import com.cst438.controllers.GradeBookController;
 import com.cst438.domain.Assignment;
 import com.cst438.domain.AssignmentGrade;
@@ -28,8 +32,10 @@ import com.cst438.domain.Course;
 import com.cst438.domain.CourseRepository;
 import com.cst438.domain.Enrollment;
 import com.cst438.domain.GradebookDTO;
+import com.cst438.domain.AssignmentListDTO;
 import com.cst438.services.RegistrationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+ 
 
 import org.springframework.test.context.ContextConfiguration;
 
@@ -46,7 +52,7 @@ import org.springframework.test.context.ContextConfiguration;
  *  addFilters=false turns off security.  (I could not get security to work in test environment.)
  *  WebMvcTest is needed for test environment to create Repository classes.
  */
-@ContextConfiguration(classes = { GradeBookController.class })
+@ContextConfiguration(classes = { GradeBookController.class})
 @AutoConfigureMockMvc(addFilters = false)
 @WebMvcTest
 public class JunitTestGradebook {
@@ -242,6 +248,7 @@ public class JunitTestGradebook {
 		updatedag.setScore("88");
 		verify(assignmentGradeRepository, times(1)).save(updatedag);
 	}
+	
 
 	private static String asJsonString(final Object obj) {
 		try {
