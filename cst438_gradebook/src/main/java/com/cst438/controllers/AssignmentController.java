@@ -1,16 +1,12 @@
 package com.cst438.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,15 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.cst438.domain.Assignment;
-import com.cst438.domain.AssignmentListDTO;
 import com.cst438.domain.AssignmentGrade;
 import com.cst438.domain.AssignmentGradeRepository;
 import com.cst438.domain.AssignmentRepository;
 import com.cst438.domain.Course;
-import com.cst438.domain.CourseDTOG;
 import com.cst438.domain.CourseRepository;
-import com.cst438.domain.Enrollment;
-import com.cst438.domain.GradebookDTO;
 import com.cst438.services.RegistrationService;
 
 @RestController
@@ -83,7 +75,6 @@ public class AssignmentController {
 	//Delete request to delete the assignment from the db
 	@DeleteMapping("/assignment/{id}")
 	public void deleteAssignment(@PathVariable("id") int id) {
-		String email = "dwisneski@csumb.edu";  // user name (should be instructor's email)
 
 		Assignment ag = assignmentRepository.findById(id).orElse(null);
 		List<AssignmentGrade> asg = assignmentGradeRepository.findByAssignmentId(ag.getId());
