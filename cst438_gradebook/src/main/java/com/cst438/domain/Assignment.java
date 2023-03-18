@@ -66,4 +66,21 @@ public class Assignment {
 				+ ", needsGrading=" + needsGrading + "]";
 	}
 	
+	// equality is based on id and name attributes only!
+//		@Override
+//		public boolean equals(Object obj) {
+//			if (this == obj)
+//				return true;
+//			if (obj == null)
+//				return false;
+//			if (getClass() != obj.getClass())
+//				return false;
+//			Assignment other = (Assignment) obj;
+//			if (id != other.id)
+//				return false;
+//			if (name != other.name) 
+//				return false;
+//			return true;
+//		}
+	
 }
