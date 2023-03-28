@@ -45,7 +45,13 @@ public class RegistrationServiceMQ extends RegistrationService {
 	public void receive(EnrollmentDTO enrollmentDTO) {
 		
 		//TODO  complete this method in homework 4
-		
+		//create enrollment entity and save to enrollment table in gradebook db
+		Enrollment e = new Enrollment();
+		e.setStudentName(enrollmentDTO.studentName);
+		e.setStudentEmail(enrollmentDTO.studentEmail);
+		e.setCourse(courseRepository.findById(enrollmentDTO.course_id).orElse(null));
+		enrollmentRepository.save(e);
+		System.out.println("Added new enrollment, name: " + enrollmentDTO.studentName + ", email: "+ enrollmentDTO.studentEmail + ", course id: " + enrollmentDTO.course_id);
 	}
 
 	// sender of messages to Registration Service
@@ -53,7 +59,10 @@ public class RegistrationServiceMQ extends RegistrationService {
 	public void sendFinalGrades(int course_id, CourseDTOG courseDTO) {
 		 
 		//TODO  complete this method in homework 4
-		
+		//similar to method in registration service, use rabbit template instead of resttemplate
+		//rabbit template convert send
+		rabbitTemplate.convertAndSend(registrationQueue.getName(), courseDTO);
+		System.out.println("Message send to registration service for Grades for course id: " + course_id);
 	}
 
 }

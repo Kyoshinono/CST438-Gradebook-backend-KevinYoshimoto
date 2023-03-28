@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.cst438.domain.Assignment;
 import com.cst438.domain.AssignmentGrade;
 import com.cst438.domain.AssignmentGradeRepository;
+import com.cst438.domain.AssignmentListDTO.AssignmentDTO;
 import com.cst438.domain.AssignmentRepository;
 import com.cst438.domain.Course;
 import com.cst438.domain.CourseRepository;
@@ -41,7 +42,7 @@ public class AssignmentController {
 	//Posting a new assignment giving the name and the dueDate in the body and the course id in the path
 	@PostMapping("/course/{id}")
 	public void createNewAssignment(@RequestBody Assignment assign, @PathVariable("id") int course_id) {
-		String email = "dwisneski@csumb.edu";  // user name (should be instructor's email)
+String email = "dwisneski@csumb.edu";  // user name (should be instructor's email)
 		
 		Course c = courseRepository.findById(course_id).orElse(null);
 		if (!c.getInstructor().equals(email)) {
@@ -59,6 +60,7 @@ public class AssignmentController {
 		assign.setCourse(c);
 		
 		assignmentRepository.save(assign);
+
 
 	}
 	
@@ -85,7 +87,6 @@ public class AssignmentController {
 				throw new ResponseStatusException( HttpStatus.BAD_REQUEST, "There are Grades for the Assignment");
 			}
 		}
-		
 		
 		assignmentRepository.delete(ag);
 	}
