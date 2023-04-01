@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.*;
 
-public class E2E_test {
+public class E2E_addAssignment_Test {
 	public static final String CHROME_DRIVER_FILE_LOCATION 
                           = "C:/Users/bnhoy/chromedriver_win32/chromedriver.exe";
 	public static final String URL = "http://localhost:3000";
